@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Edit Page </title>
+    <link rel="stylesheet" type="text/css" href="../bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .background {
+            background-image: url(../img/background.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+        }
+
+        .td {
+            margin-bottom: 5.5rem;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="background">
+        <h3 class="d-flex justify-content-center ">Add Book Record Data</h3>
+        <div class="d-flex justify-content-center align-items-center  text-center ">
+            <form action="/addbookData" method="post">
+                <table class="d-flex justify-content-center align-items-c enter mx-3 text-center">
+                    <tr>
+                        <td>Title</td>
+                        <td>
+                            <input type="text" name="title" id="" value="<%= data.title %>" class="mb-2">
+                            <input type="hidden" name="editId" id="" value="<%= data.id %>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td><input type="number" name="price" id="" value="<%= data.price %>" class="mb-2"></td>
+                    </tr>
+                    <tr>
+                        <td>Author</td>
+                        <td><input type="text" name="authorName" id="" value="<%= data.authorName %>" class="mb-2"></td>
+                    </tr>
+                    <tr>
+                        <td>City</td>
+                        <td>
+                            <select name="city" id="" class="mb-2">
+                                <option disabled selected>--Select City--</option>
+                                <% let city=['Surat','Pune','Vadodra','Bharuch'] 
+                                city.map((val)=>{
+                                    %>
+                                    <option value="<%= val %>" <% if(data.city==val){%> selected
+                                        <%} %>>
+                                            <%= val %>
+                                    </option>
+                                    <%})%>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pages No</td>
+                        <td>
+                            <input type="radio" name="pagesRange" id="" value="50-100" <%
+                                if(data.pagesRange==`50-100`){%>checked<%}%>  class="mb-2"> 50-100
+                                <input type="radio" name="pagesRange" id="" value="100-200" <%
+                                    if(data.pagesRange==`100-200`){%>checked<%}%>  class="mb-2"> 100-200
+                                    <input type="radio" name="pagesRange" id="" value="200-300" <%
+                                        if(data.pagesRange==`200-300`){%>checked<%}%>  class="mb-2"> 200-300
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>
+                            <textarea name="description" id="" class="mb-2"><%= data.description %></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Language</td>
+                        <td>
+                            <input type="radio" name="language" id="" value="english" <% if(data.language=='english'
+                                ){%>checked<%}%> class="mb-2"> English
+                                <input type="radio" name="language" id="" value="hindi" <% if(data.language=='hindi'
+                                    ){%>checked<%}%> class="mb-2"> Hindi
+                                    <input type="radio" name="language" id="" value="gujarati" <%
+                                        if(data.language=='gujarati' ){%>checked<%}%> class="mb-2"> Gujarati
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" name="AddBookData" id="" value="Add Book Data" class="btn btn-info mb-2 mt-2">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

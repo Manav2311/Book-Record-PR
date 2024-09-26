@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Home Page </title>
+    <link rel="stylesheet" type="text/css" href="../bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: black;
+        }
+
+        .background {
+            background-image: url(./img/background.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh ;
+        }
+
+        .td {
+            margin-bottom: 5.5rem;
+
+        }
+    </style>
+</head>
+
+<body data-bs-theme="light">
+    <div class=" background">
+        <h3 class=" text-center mx-auto ">Add Book Data</h3>
+        <div class=" addData d-flex justify-content-center align-items-center  text-center">
+            <form action="/addbookData" method="post">
+                <table class=" d-flex justify-content-center align-items-c enter mx-3 text-center border w-100 border-black">
+                    <tr>
+                        <td> Title</td>
+                        <td><input type="text" name="title" id=""  class="mb-2 mt-2 bg-secondey bg-transparent">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td><input type="number" name="price" id=""  class="mb-2 bg-secondey bg-transparent">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Author</td>
+                        <td><input type="text" name="authorName" id="" class="mb-2 bg-secondey bg-transparent">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>City</td>
+                        <td>
+                            <select name="city" id="" class="bg-transparent">
+                                <option disabled selected>--Select City--</option>
+                                <% let city=['Surat','Pune','Vadodra','Bharuch'] ;
+                                city.map((val,index)=>{
+                                    %>
+                                    <option value="<%= val %>">
+                                        <%= val %>
+                                    </option>
+                                    <% })%>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pages Range</td>
+                        <td>
+                            <input type="radio" name="pagesRange" id="" value="50-100" class="ms-3 mb-2"> 50-100
+                            <input type="radio" name="pagesRange" id="" value="100-200" class="ms-3 mb-2"> 100-200
+                            <input type="radio" name="pagesRange" id="" value="200-300" class="ms-3 mb-2"> 200-300
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>
+                            <textarea name="description" id="" class="mb-2 bg-transparent text-dark"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Language</td>
+                        <td>
+                            <input type="radio" name="language" id="" value="english" class="mb-2"> English
+                            <input type="radio" name="language" id="" value="hindi" class="mb-2"> Hindi
+                            <input type="radio" name="language" id="" value="gujarati" class="mb-2"> Gujarati
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" name="AddBookData" id="" value="Add Book Data"
+                                class="btn btn-info mb-2 mt-2 rounded">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <h3 class="text-center mx-auto mt-2">Book Details</h3>
+        <div class=" record d-flex justify-content-center align-itens-center">
+            <table
+                class="table table-secondary table-hover table-striped border border-row text-center w-75 text-center ">
+                <tr class="table-secondary">
+                    <td class="table-info text-black border border-black">Title</td>
+                    <td class="table-info text-black border border-black">Price</td>
+                    <td class="table-info text-black border border-black">Author</td>
+                    <td class="table-info text-black border border-black">City</td>
+                    <td class="table-info text-black border border-black">Pages Range</td>
+                    <td class="table-info text-black border border-black">Description</td>
+                    <td class="table-info text-black border border-black">Language</td>
+                    <td class="table-info text-black border border-black">Delete</td>
+                    <td class="table-info text-black border border-black">Edited</td>
+                </tr>
+                <% data.map((val,index)=>{ %>
+                    <tr class="table-info text-black border border-black">
+                        <td class="table-info text-black border border-black">
+                            <%= val.title %>
+                        </td>
+                        <td class="table-info text-black border border-black">
+                            <%= val.price %>
+                        </td>
+                        <td class="table-info text-black border border-black">
+                            <%= val.authorName %>
+                        </td>
+                        <td class="table-info text-black border border-black">
+                            <%= val.city %>
+                        </td>
+                        <td class="table-info text-black border border-black">
+                            <%= val.pagesRange %>
+                        </td>
+                        <td class="table-info text-black border border-black">
+                            <%= val.description %>
+                        </td>
+                        <td class="table-info text-black border border-black">
+                            <%= val.language %>
+                        </td>
+                        <td class="table-info text-black border border-black">
+                            <a href="/deletebookData/<%= val._id %>"><span class="w-50"><i class="fa-regular fa-trash-can text-black"></i></span></a>
+                        </td>
+                        <td class="table-info text-black border border-black">
+                            <a href="/editbookData/<%= val._id %>"><span class="w-50"><i class="fa-regular fa-pen-to-square text-black"></i></a>
+                        </td>
+                    </tr>
+                    <%})%>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
